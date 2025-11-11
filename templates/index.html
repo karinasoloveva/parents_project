@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Семейная открытка</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: #ffe6f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+        }
+        h1 {
+            font-size: 36px;
+            color: #d63384;
+        }
+        p {
+            font-size: 24px;
+            color: #6f42c1;
+        }
+        button {
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            background-color: #fd7e14;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #e8590c;
+        }
+        .surprise {
+            display: none;
+            margin-top: 20px;
+            font-size: 28px;
+            color: #198754;
+        }
+        /* Анимация сердечек */
+        .heart {
+            position: absolute;
+            font-size: 24px;
+            animation: floatUp 3s linear infinite;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-600px) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Я вас люблю, мамочка и папочка!</h1>
+        <p> 💖</p>
+        <button id="surpriseBtn">Нажми, чтобы увидеть сюрприз</button>
+        <div class="surprise" id="surprise">🎉 Сюрприз! Вы замечательные! 🎉</div>
+    </div>
+
+    <script>
+        const btn = document.getElementById('surpriseBtn');
+        const surprise = document.getElementById('surprise');
+
+        btn.addEventListener('click', () => {
+            surprise.style.display = 'block';
+            createHearts(30); // создаем 30 сердечек
+        });
+
+        function createHearts(count) {
+            for (let i = 0; i < count; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = '💖';
+                heart.style.left = Math.random() * window.innerWidth + 'px';
+                heart.style.animationDuration = (2 + Math.random() * 3) + 's';
+                heart.style.fontSize = (16 + Math.random() * 24) + 'px';
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 3000);
+            }
+        }
+    </script>
+</body>
+</html>
